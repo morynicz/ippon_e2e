@@ -8,9 +8,11 @@ dist: trusty
 python:
  - "3.6"
 
-node_js: "10"
+node_js:
+ - "10"
 
 before_script:
+  - git submodule -q foreach git pull -q origin master
   - psql -c 'create database travis_ci_test;' -U postgres
   - cd front
   - npm install
