@@ -12,6 +12,7 @@ node_js:
  - "10"
 
 before_script:
+  - nvm install 10.10.0
   - git submodule -q foreach git pull -q origin master
   - psql -c 'create database travis_ci_test;' -U postgres
   - cd front
@@ -22,6 +23,7 @@ before_script:
 
 script:
  - cd front
+ - nvm use node
  - node_modules/@angular/cli/bin/ng serve -c test
  - cd ../back
  - ./manage.py test e2e.e2e_test
