@@ -23,7 +23,9 @@ before_script:
 #  - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
 #  - wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_linux64.zip
 #  - wget https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
-  - wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE_`google-chrome --version | grep -o -E [0-9.]+`
+  - export CHROME_VERSION=google-chrome --version | grep -o -E [0-9.]+
+  - google-chrome --version | grep -o -E [0-9.]+
+  - wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION
   - mkdir driver
   - unzip chromedriver_linux64.zip -d $TRAVIS_BUILD_DIR/driver/
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/driver/
