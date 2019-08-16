@@ -11,6 +11,9 @@ python:
 node_js:
  - "10"
 
+addons:
+  chrome: stable
+
 before_script:
   - nvm install 10.10.0
   - git submodule -q foreach git pull -q origin master
