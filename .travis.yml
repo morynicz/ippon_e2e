@@ -14,7 +14,14 @@ node_js:
 addons:
   chrome: stable
 
+services:
+  - xvfb
+
 before_script:
+  - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
+  - mkdir driver
+  - unzip chromedriver_linux64.zip -d driver/
+  - export PATH=$PATH:`pwd`/driver/
   - nvm install 10.10.0
   - git submodule -q foreach git pull -q origin master
   - psql -c 'create database travis_ci_test;' -U postgres
@@ -29,7 +36,7 @@ script:
  - nvm use node
  - node_modules/@angular/cli/bin/ng serve -c test
  - cd ../back
- - ./manage.py test e2e.test_e2e
+ - xvfb-run ./manage.py test e2e.test_e2e
 
 addons:
   postgresql: "9.6"
