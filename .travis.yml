@@ -4,7 +4,7 @@ language: python
 # - export DISPLAY=:99.0
 # - sh -e /etc/init.d/xvfb start
 sudo: false
-dist: trusty
+dist: xenial
 python:
  - "3.6"
 
@@ -16,6 +16,7 @@ addons:
 
 services:
   - xvfb
+  - postgresql
 
 before_script:
   - google-chrome --version
