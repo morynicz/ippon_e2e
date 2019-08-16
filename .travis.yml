@@ -18,11 +18,10 @@ services:
   - xvfb
 
 before_script:
-  - echo $TRAVIS_BUILD_DIR
-  - pwd
   - google-chrome --version
 #  - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
-  - wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_linux64.zip
+#  - wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_linux64.zip
+  - wget https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
   - mkdir driver
   - unzip chromedriver_linux64.zip -d $TRAVIS_BUILD_DIR/driver/
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/driver/
