@@ -29,7 +29,7 @@ script:
  - nvm use node
  - node_modules/@angular/cli/bin/ng serve -c test
  - cd ../back
- - ./manage.py test e2e.e2e_test
+ - ./manage.py test e2e.test_e2e
 
 addons:
   postgresql: "9.6"
