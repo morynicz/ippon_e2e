@@ -18,25 +18,26 @@ services:
   - xvfb
 
 before_script:
+  - echo $TRAVIS_BUILD_DIR
+  - pwd
   - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
   - mkdir driver
-  - unzip chromedriver_linux64.zip -d driver/
-  - export PATH=$PATH:`pwd`/driver/
+  - unzip chromedriver_linux64.zip -d $TRAVIS_BUILD_DIR/driver/
+  - export PATH=$PATH:$TRAVIS_BUILD_DIR/driver/
   - nvm install 10.10.0
   - git submodule -q foreach git pull -q origin master
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cd front
+  - cd $TRAVIS_BUILD_DIR/front
   - npm install
-  - cd ../back
+  - cd $TRAVIS_BUILD_DIR/back
   - pip install -r requirements.txt
   - ./manage.py migrate
-  - cd ..
 
 script:
- - cd front
+ - cd $TRAVIS_BUILD_DIR/front
  - nvm use node
  - node_modules/@angular/cli/bin/ng serve -c test
- - cd ../back
+ - cd $TRAVIS_BUILD_DIR/back
  - xvfb-run ./manage.py test e2e.test_e2e
 
 addons:
