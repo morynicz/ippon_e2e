@@ -23,16 +23,13 @@ env:
 
 before_script:
   - google-chrome --version
-#  - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
-#  - wget https://chromedriver.storage.googleapis.com/75.0.3770.140/chromedriver_linux64.zip
-#  - wget https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
-#  - export CHROME_VERSION=google-chrome --version | grep -o -E [0-9.]+
-  - google-chrome --version | grep -o -E [0-9.]+
-#  - wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION
-  - wget https://chromedriver.storage.googleapis.com/73.0.3683.68/chromedriver_linux64.zip
-  - mkdir driver
-  - unzip chromedriver_linux64.zip -d $TRAVIS_BUILD_DIR/driver/
+  - export CHROME_VERSION=`google-chrome --version | grep -o -E [0-9]+\.[0-9]+\.[0-9]+`
+  - wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION
+  - wget https://chromedriver.storage.googleapis.com/`cat LATEST_RELEASE_$CHROME_VERSION`/chromedriver_linux64.zip
+
+  - mkdir driver && unzip chromedriver_linux64.zip -d $TRAVIS_BUILD_DIR/driver/ && rm chromedriver_linux64.zip LATEST_RELEASE_$CHROME_VERSION
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/driver/
+
   - nvm install 10.10.0
   - git submodule -q foreach git pull -q origin master
   - psql -c 'create database travis_ci_test;' -U postgres
