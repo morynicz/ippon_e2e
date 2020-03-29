@@ -30,7 +30,7 @@ before_script:
   - mkdir driver && unzip chromedriver_linux64.zip -d $TRAVIS_BUILD_DIR/driver/ && rm chromedriver_linux64.zip LATEST_RELEASE_$CHROME_VERSION
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/driver/
 
-  - nvm install 10.10.0
+  - nvm install 10.19.0
   - git submodule -q foreach git pull -q origin master
   - psql -c 'create database travis_ci_test;' -U postgres
   - cd $TRAVIS_BUILD_DIR/front
